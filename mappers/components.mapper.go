@@ -3,8 +3,9 @@ package mappers
 import (
 	"errors"
 	"fmt"
-	"webbugs-common/contracts"
-	"webbugs-common/models"
+
+	"github.com/jental/webbugs-common-go/contracts"
+	"github.com/jental/webbugs-common-go/models"
 )
 
 func MapFromComponents(components *models.Components) map[uint]contracts.ComponentContract {

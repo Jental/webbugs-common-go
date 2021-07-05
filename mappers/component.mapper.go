@@ -4,8 +4,9 @@ import (
 	"errors"
 	"fmt"
 	"strconv"
-	"webbugs-common/contracts"
-	"webbugs-common/models"
+
+	"github.com/jental/webbugs-common-go/contracts"
+	"github.com/jental/webbugs-common-go/models"
 )
 
 func MapFromComponent(component *models.Component) contracts.ComponentContract {

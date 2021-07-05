@@ -4,8 +4,9 @@ import (
 	"errors"
 	"fmt"
 	"sync"
-	"webbugs-common/contracts"
-	"webbugs-common/models"
+
+	"github.com/jental/webbugs-common-go/contracts"
+	"github.com/jental/webbugs-common-go/models"
 )
 
 func MapFromField(field *models.Field) contracts.FieldContract {

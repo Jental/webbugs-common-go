@@ -1,8 +1,8 @@
 package mappers
 
 import (
-	"webbugs-common/contracts"
-	"webbugs-common/models"
+	"github.com/jental/webbugs-common-go/contracts"
+	"github.com/jental/webbugs-common-go/models"
 )
 
 func MapFromMultiField(field *models.Field) contracts.MultiFieldContract {
