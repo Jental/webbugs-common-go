@@ -29,6 +29,7 @@ func MapToComponents(components map[uint]contracts.ComponentContract, field *mod
 			return nil, errors.New(err2)
 		}
 		result.Set(mapped)
+		//log.Println(fmt.Sprintf("Component [%d]: %d %v", mapped.ID, len(mapped.Walls), mapped.IsActive))
 	}
 
 	return &result, nil
