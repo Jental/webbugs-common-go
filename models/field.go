@@ -43,3 +43,19 @@ func (field *Field) Get(crd Coordinates) *Cell {
 
 	return nil
 }
+
+// Get - retrieves a cell
+func (field *Field) GetWithExists(crd Coordinates) (*Cell, bool) {
+	cell, ok := field.Grid.Load(field.key(crd))
+	if !ok {
+		return nil, false
+	} else if cell != nil {
+		return cell.(*Cell), true
+	} else {
+		return nil, true
+	}
+}
+
+func (field *Field) Set(crd Coordinates, cell *Cell) {
+	field.Grid.Store(field.key(crd), cell)
+}
