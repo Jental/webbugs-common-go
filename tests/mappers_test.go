@@ -84,3 +84,48 @@ func TestMapToData(t *testing.T) {
 		t.Fail()
 	}
 }
+
+func TestMapFromData(t *testing.T) {
+	field := models.NewField(3)
+	crd := models.NewCoordinates(1, 2, 1)
+	playerID, err := uuid.NewUUID()
+	if err != nil {
+		t.Log("Failed to generate layer id.")
+		t.Fail()
+	}
+	cell := models.NewBugCell(playerID, crd, true)
+	field.Set(crd, &cell)
+	crd2 := models.NewCoordinates(2, 1, 2)
+	walls := make([]*models.Cell, 1)
+	component := models.NewComponent(true, walls)
+	wall := models.NewWallCell(playerID, crd2, &component)
+	walls[0] = &wall
+	var components models.Components
+	components.Set(&component)
+
+	dataContract := mappers.MapFromData(&field, &components)
+	t.Log(fmt.Sprintf("Contract [%v]", dataContract))
+
+	dataContract.Field.Grid[0].Grid[169].PlayerID = uuid.MustParse("16639eed-df40-11eb-94e9-02004c4f4f50")
+
+	j, err := json.Marshal(dataContract)
+	if err != nil {
+		t.Log(fmt.Sprintf("Error during serialization: %v", err))
+		t.Fail()
+	}
+
+	expJson, err := ioutil.ReadFile("../resources/data1.test.resources.json")
+	if err != nil {
+		t.Log("error should be nil", err)
+		t.Fail()
+	}
+
+	for i, ch := range j {
+		if expJson[i] != ch {
+			t.Log("different symbols:", i, expJson[i], ch)
+			t.Log(string(j))
+			t.Log(string(expJson))
+			t.FailNow()
+		}
+	}
+}
